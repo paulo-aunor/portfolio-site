@@ -39,6 +39,7 @@ const NAV_ITEMS: NavItem[] = [
   { id: "about", label: "About" },
   { id: "work", label: "What I build" },
   { id: "case-study", label: "Case study" },
+  { id: "projects", label: "Projects" },
   { id: "blueprint", label: "The Blueprint" },
   { id: "contact", label: "Contact" },
 ];
@@ -697,10 +698,144 @@ const FRAMEWORK: {
   },
 ];
 
+type Project = {
+  title: string;
+  tagline: string;
+  body: string;
+  image: string;
+  imageAlt: string;
+  imageAspect: "landscape" | "portrait";
+  tech: string[];
+  href?: string;
+  hrefLabel?: string;
+  status?: string;
+};
+
+const PROJECTS: Project[] = [
+  {
+    title: "TetherPOS",
+    tagline: "Offline-first POS for retail and restaurants.",
+    body: "Built for shops where the internet drops out mid-shift. Menu, inventory, and sales reports run entirely on-device via IndexedDB. Excel import for menu/inventory setup.",
+    image: `${import.meta.env.BASE_URL}projects/tetherpos-cart.png`,
+    imageAlt: "TetherPOS point-of-sale screen with menu items and populated cart",
+    imageAspect: "landscape",
+    tech: ["React", "Vite", "Dexie.js", "JavaScript"],
+    href: "https://github.com/paulo-aunor/tetherpos",
+    hrefLabel: "Repo",
+  },
+  {
+    title: "Docket Vein",
+    tagline: "Personal CRM for freelance leads, inbound and outbound.",
+    body: "Pulls job posts from r/forhire and outbound local-business leads from Google Places. Scores each against an ICP profile via Gemini 2.5 Flash and drafts cold outreach in your voice. Runs entirely on your machine.",
+    image: `${import.meta.env.BASE_URL}projects/docket-vein-picks.png`,
+    imageAlt: "Docket Vein Daily Picks view showing AI-scored leads with reasoning",
+    imageAspect: "landscape",
+    tech: ["React", "Node", "Express", "SQLite", "Python", "Gemini"],
+    status: "Private repo",
+  },
+  {
+    title: "Record Routes",
+    tagline: "Delivery checklist for the Waterloo Region Record paper route.",
+    body: "Pick tonight's routes, get an ordered checklist of stops, tap an address for turn-by-turn in Google Maps. State survives app kills and phone reboots. Screen stays awake through the shift.",
+    image: `${import.meta.env.BASE_URL}projects/record-routes-home.png`,
+    imageAlt: "Record Routes home screen with three delivery routes selected",
+    imageAspect: "portrait",
+    tech: ["React Native", "Expo", "TypeScript", "AsyncStorage"],
+  },
+];
+
+function Projects() {
+  return (
+    <section id="projects" data-reveal className="mt-24 lg:mt-32">
+      <Kicker number="04">Projects</Kicker>
+      <h2 className="mt-4 text-2xl font-semibold tracking-tight text-fg-strong md:text-3xl">
+        Things I've shipped for myself.
+      </h2>
+      <p className="mt-3 max-w-xl text-sm text-fg-muted">
+        Not client work. Personal tools I built because I needed them,
+        kept using them, and could hand them to someone else tomorrow.
+      </p>
+
+      <div className="mt-8 flex flex-col gap-6">
+        {PROJECTS.map((p) => (
+          <article
+            key={p.title}
+            className="group relative overflow-hidden rounded-[10px] border border-border bg-surface transition-colors hover:bg-surface-2"
+          >
+            <span
+              aria-hidden="true"
+              className="absolute inset-x-0 top-0 z-10 h-px bg-term opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+            />
+            <div
+              className={`w-full overflow-hidden border-b border-border bg-bg ${
+                p.imageAspect === "portrait"
+                  ? "flex items-center justify-center py-6"
+                  : ""
+              }`}
+              style={
+                p.imageAspect === "landscape"
+                  ? { aspectRatio: "16 / 10" }
+                  : undefined
+              }
+            >
+              <img
+                src={p.image}
+                alt={p.imageAlt}
+                loading="lazy"
+                className={
+                  p.imageAspect === "portrait"
+                    ? "h-72 w-auto rounded-lg border border-border shadow-lg shadow-black/40"
+                    : "h-full w-full object-cover object-top"
+                }
+              />
+            </div>
+            <div className="p-6">
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <h3 className="text-lg font-semibold text-fg-strong">
+                  {p.title}
+                </h3>
+                {p.href ? (
+                  <a
+                    href={p.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.15em] text-accent hover:text-accent-hi hover:underline"
+                  >
+                    {p.hrefLabel ?? "View"}
+                    <ArrowRight size={12} aria-hidden="true" />
+                  </a>
+                ) : p.status ? (
+                  <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-fg-subtle">
+                    {p.status}
+                  </span>
+                ) : null}
+              </div>
+              <p className="mt-1 text-sm font-medium text-fg">{p.tagline}</p>
+              <p className="mt-3 text-sm leading-relaxed text-fg-muted">
+                {p.body}
+              </p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {p.tech.map((t) => (
+                  <li
+                    key={t}
+                    className="rounded-lg bg-term-sub px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-wide text-term"
+                  >
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function Blueprint() {
   return (
     <section id="blueprint" data-reveal className="mt-24 lg:mt-32">
-      <Kicker number="04">The Blueprint</Kicker>
+      <Kicker number="05">The Blueprint</Kicker>
       <h2 className="mt-4 text-2xl font-semibold tracking-tight text-fg-strong md:text-3xl">
         The Operator Blueprint
       </h2>
@@ -744,7 +879,7 @@ function Blueprint() {
 function Contact() {
   return (
     <section id="contact" data-reveal className="mt-24 lg:mt-32 lg:pb-24">
-      <Kicker number="05">Contact</Kicker>
+      <Kicker number="06">Contact</Kicker>
       <h2 className="mt-4 text-2xl font-semibold tracking-tight text-fg-strong md:text-3xl">
         Where are you losing leads?
       </h2>
@@ -810,6 +945,7 @@ export default function App() {
           <About />
           <Work />
           <CaseStudy />
+          <Projects />
           <Blueprint />
           <Contact />
           <Footer />
