@@ -460,6 +460,17 @@ const WORKFLOWS: {
       { icon: AlertTriangle, label: "Flagged if off" },
     ],
   },
+  {
+    icon: Wrench,
+    title: "Ops systems that finally talk",
+    body: "Your POS, inventory, accounting, and payroll live in separate SaaS tools, so someone rebuilds the same reports every week by hand. I stitch them together with a custom internal tool and let AI handle the judgment calls (returns vs refunds, misclassified line items, edge cases the rules can't catch). Your ops team spends the time on decisions, not data entry.",
+    steps: [
+      { icon: Database, label: "Systems don't talk" },
+      { icon: Wrench, label: "Custom pull job runs" },
+      { icon: Bot, label: "AI classifies edge cases" },
+      { icon: ClipboardList, label: "Clean report to ops" },
+    ],
+  },
 ];
 
 function Work() {
@@ -741,6 +752,8 @@ const PROJECTS: Project[] = [
     imageAlt: "Record Routes home screen with three delivery routes selected",
     imageAspect: "portrait",
     tech: ["React Native", "Expo", "TypeScript", "AsyncStorage"],
+    href: "https://github.com/paulo-aunor/record-routes",
+    hrefLabel: "Repo",
   },
 ];
 
