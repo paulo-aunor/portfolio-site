@@ -1,29 +1,39 @@
 @import "tailwindcss";
 
-/* Tokens per DESIGN-STANDARDS.md v2.0 §2/§3. Components use tokens only.
-   Dark by default; light mode intentionally dropped for the portfolio surface. */
+/* Tokens per DESIGN-STANDARDS.md v3.0 §2/§3. Components use tokens only.
+   Dark-only. Single-accent (lime) does CTAs, focus, links, kickers, stats.
+   System font stack — no web fonts loaded (v3.0 §8). */
 @theme {
-  --color-bg: #0B0F19;
-  --color-surface: #111827;
-  --color-surface-2: #1F2937;
-  --color-border: #1F2937;
-  --color-border-mute: rgb(31 41 55 / 0.5);
-  --color-fg: #E5E7EB;
-  --color-fg-strong: #F1F5F9;
-  --color-fg-muted: #94A3B8;
-  --color-fg-subtle: #64748B;
-  --color-accent: #3B82F6;
-  --color-accent-hi: #60A5FA;
-  --color-accent-sub: rgb(30 58 138 / 0.20);
-  --color-on-accent: #FFFFFF;
-  --color-term: #10B981;
-  --color-term-hi: #34D399;
-  --color-term-sub: rgb(16 185 129 / 0.10);
-  --color-danger: #EF4444;
-  --color-success: #22C55E;
+  --color-bg: #020403;
+  --color-bg-alt: #030604;
+  --color-surface: #0d140f;
+  --color-surface-2: rgb(255 255 255 / 0.045);
+  --color-surface-3: rgb(255 255 255 / 0.07);
+  --color-border: rgb(255 255 255 / 0.09);
+  --color-border-accent: rgb(166 255 63 / 0.3);
+  --color-fg: #f7fff9;
+  --color-fg-strong: #ffffff;
+  --color-fg-body: #d8e4db;
+  --color-fg-muted: #849087;
+  --color-fg-subtle: #606a63;
+  --color-accent: #a6ff3f;
+  --color-accent-hi: #d5ff9e;
+  --color-accent-lo: #68b910;
+  --color-accent-sub: rgb(166 255 63 / 0.08);
+  --color-accent-glow: rgb(166 255 63 / 0.25);
+  --color-on-accent: #071004;
+  --color-danger: #ff7070;
+  --color-danger-sub: rgb(255 112 112 / 0.06);
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-sans: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Consolas, monospace;
+
+  --radius-chip: 8px;
+  --radius-control: 12px;
+  --radius-card: 17px;
+  --radius-panel: 20px;
+  --radius-marketing: 28px;
 }
 
 html {
@@ -47,6 +57,7 @@ body {
   color: var(--color-fg);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Anchor targets clear the sticky top nav on <1024 */
@@ -59,7 +70,17 @@ section[id] {
   outline-offset: 2px;
 }
 
-/* Cursor spotlight for portfolio shell — driven by --mx/--my JS vars on <body>.
+/* v3.0 canonical card surface (§4c / §11 .surface-card) */
+.surface-card {
+  background: linear-gradient(
+    145deg,
+    rgb(19 28 21 / 0.96),
+    rgb(8 12 9 / 0.96)
+  );
+  border: 1px solid var(--color-border);
+}
+
+/* Cursor spotlight — v3.0 lime tint. Driven by --mx/--my JS vars on <body>.
    Disabled on touch devices and under reduced motion. */
 .cursor-spotlight::before {
   content: "";
@@ -69,7 +90,7 @@ section[id] {
   pointer-events: none;
   background: radial-gradient(
     600px circle at var(--mx, 50%) var(--my, 50%),
-    rgb(59 130 246 / 0.06),
+    rgb(166 255 63 / 0.05),
     transparent 40%
   );
   transition: background 200ms ease-out;
@@ -81,13 +102,14 @@ section[id] {
   }
 }
 
-/* Section entrance — one-shot fade + rise. IntersectionObserver toggles [data-visible]. */
+/* Section entrance — v3.0 canonical `fadeUp` (§6): opacity 0→1, translateY 25→0, 700ms ease.
+   IntersectionObserver toggles [data-visible]. */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(25px);
   transition:
-    opacity 300ms ease-out,
-    transform 300ms ease-out;
+    opacity 700ms ease-out,
+    transform 700ms ease-out;
 }
 [data-reveal][data-visible="true"] {
   opacity: 1;

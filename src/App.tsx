@@ -123,10 +123,9 @@ function useRevealOnScroll() {
 
 /* ---------- shared pieces ---------- */
 
-function Kicker({ number, children }: { number: string; children: string }) {
+function Kicker({ children }: { children: string }) {
   return (
-    <p className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-term">
-      <span aria-hidden="true">&gt; {number}. </span>
+    <p className="text-[10px] font-black uppercase tracking-[0.16em] text-accent">
       {children}
     </p>
   );
@@ -154,11 +153,11 @@ function FlowDiagram({
       {steps.map((step, i) => (
         <li key={step.label} className={`flex items-center gap-2 ${itemClass}`}>
           <div
-            className={`flex flex-1 items-center gap-4 rounded-[10px] border border-border bg-surface px-4 py-4 ${nodeClass}`}
+            className={`surface-card flex flex-1 items-center gap-4 rounded-[12px] px-4 py-4 ${nodeClass}`}
           >
             <step.icon
               size={22}
-              className="shrink-0 text-term"
+              className="shrink-0 text-accent"
               aria-hidden="true"
             />
             <span className="text-sm leading-snug text-fg-muted">
@@ -214,8 +213,8 @@ function Sidebar({
           customer. Based in Kitchener-Waterloo.
         </p>
 
-        <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.15em] text-fg-subtle">
-          &gt; currently
+        <p className="mt-6 text-[10px] font-black uppercase tracking-[0.16em] text-accent">
+          Currently
         </p>
         <p className="mt-1 text-sm text-fg-muted">
           Flat-fee audits and AI-automation builds for small businesses.
@@ -234,14 +233,14 @@ function Sidebar({
                   >
                     <span
                       aria-hidden="true"
-                      className={`h-px transition-all duration-[240ms] ease-out ${
+                      className={`h-[2px] rounded-full transition-all duration-[240ms] ease-out ${
                         isActive
-                          ? "w-10 bg-term"
-                          : "w-6 bg-border group-hover:w-10 group-hover:bg-term"
+                          ? "w-10 bg-accent shadow-[0_0_10px_rgb(166_255_63_/_0.5)]"
+                          : "w-6 bg-border group-hover:w-10 group-hover:bg-accent"
                       }`}
                     />
                     <span
-                      className={`font-mono text-[11px] font-medium uppercase tracking-[0.15em] transition-colors ${
+                      className={`text-[11px] font-extrabold uppercase tracking-[0.16em] transition-colors ${
                         isActive
                           ? "text-fg-strong"
                           : "text-fg-subtle group-hover:text-fg-strong"
@@ -316,8 +315,8 @@ function MobileNav({ active }: { active: string }) {
               <li key={l.id}>
                 <a
                   href={`#${l.id}`}
-                  className={`block rounded-md px-3 py-3 font-mono text-[11px] uppercase tracking-[0.15em] ${
-                    active === l.id ? "text-term" : "text-fg-muted"
+                  className={`block rounded-[12px] px-3 py-3 text-[11px] font-extrabold uppercase tracking-[0.16em] ${
+                    active === l.id ? "text-accent" : "text-fg-muted"
                   } hover:bg-surface-2 hover:text-fg-strong`}
                   onClick={() => setOpen(false)}
                 >
@@ -328,7 +327,7 @@ function MobileNav({ active }: { active: string }) {
             <li className="mt-2">
               <a
                 href="#contact"
-                className="block rounded-lg bg-accent px-4 py-3 text-center text-sm font-medium text-on-accent"
+                className="block rounded-[12px] bg-gradient-to-br from-accent-hi to-accent-lo px-4 py-3 text-center text-sm font-black uppercase tracking-[0.7px] text-on-accent shadow-[0_10px_25px_rgb(166_255_63_/_0.22)]"
                 onClick={() => setOpen(false)}
               >
                 Start with an audit
@@ -352,7 +351,7 @@ const REASSURANCES = [
 function About() {
   return (
     <section id="about" data-reveal className="pt-8 lg:pt-24">
-      <Kicker number="01">About</Kicker>
+      <Kicker>About</Kicker>
       <h2 className="mt-4 max-w-2xl text-3xl font-bold leading-tight tracking-tight text-fg-strong md:text-4xl">
         Software and AI that turn more visitors into customers.
       </h2>
@@ -375,14 +374,14 @@ function About() {
       <div className="mt-8 flex flex-wrap items-center gap-3">
         <a
           href="#contact"
-          className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-medium text-on-accent transition-colors hover:bg-accent-hi"
+          className="inline-flex items-center gap-2 rounded-[12px] bg-gradient-to-br from-accent-hi to-accent-lo px-5 py-3 text-sm font-black uppercase tracking-[0.7px] text-on-accent shadow-[0_15px_35px_rgb(166_255_63_/_0.24)] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-1 hover:shadow-[0_22px_48px_rgb(166_255_63_/_0.35)]"
         >
           Start with an audit
           <ArrowRight size={16} aria-hidden="true" />
         </a>
         <a
           href="#case-study"
-          className="inline-flex items-center rounded-lg border border-accent px-5 py-3 text-sm font-medium text-accent transition-colors hover:bg-accent-sub"
+          className="inline-flex items-center rounded-[12px] border border-border-accent px-5 py-3 text-sm font-medium text-accent transition-colors hover:bg-accent-sub"
         >
           See shipped work
         </a>
@@ -400,7 +399,7 @@ function About() {
         ))}
       </ul>
 
-      <dl className="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-[10px] border border-border bg-border sm:grid-cols-3">
+      <dl className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
         {[
           { value: "7 years", label: "on the operator side of POS and ERP" },
           {
@@ -409,9 +408,9 @@ function About() {
           },
           { value: "Audit first", label: "flat-fee engagements, never hourly" },
         ].map((s) => (
-          <div key={s.value} className="flex flex-col bg-surface p-5">
+          <div key={s.value} className="surface-card flex flex-col rounded-[17px] p-5">
             <dt className="order-last mt-1 text-xs text-fg-muted">{s.label}</dt>
-            <dd className="font-mono text-lg font-medium tabular-nums text-term">
+            <dd className="text-lg font-bold tabular-nums tracking-tight text-accent">
               {s.value}
             </dd>
           </div>
@@ -476,7 +475,7 @@ const WORKFLOWS: {
 function Work() {
   return (
     <section id="work" data-reveal className="mt-24 lg:mt-32">
-      <Kicker number="02">What I build</Kicker>
+      <Kicker>What I build</Kicker>
       <h2 className="mt-4 text-2xl font-semibold tracking-tight text-fg-strong md:text-3xl">
         Which one is yours?
       </h2>
@@ -485,15 +484,15 @@ function Work() {
         {WORKFLOWS.map((w) => (
           <article
             key={w.title}
-            className="group relative overflow-hidden rounded-[10px] border border-border bg-surface p-6 transition-colors hover:bg-surface-2"
+            className="surface-card group relative overflow-hidden rounded-[17px] p-6 transition-[transform,border-color] duration-[240ms] hover:-translate-y-1 hover:border-border-accent"
           >
             <span
               aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-px bg-term opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+              className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"
             />
             <div className="flex items-start gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-term-sub">
-                <w.icon size={22} className="text-term" aria-hidden="true" />
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-accent-sub">
+                <w.icon size={22} className="text-accent" aria-hidden="true" />
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-semibold text-fg-strong">
@@ -517,7 +516,7 @@ function Work() {
 function CaseStudy() {
   return (
     <section id="case-study" data-reveal className="mt-24 lg:mt-32">
-      <Kicker number="03">Case study</Kicker>
+      <Kicker>Case study</Kicker>
       <h2 className="mt-4 text-2xl font-semibold tracking-tight text-fg-strong md:text-3xl">
         90 minutes a day, gone.
       </h2>
@@ -567,20 +566,20 @@ function CaseStudy() {
       </div>
 
       <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div className="rounded-[10px] border border-border bg-surface p-6">
-          <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-fg-subtle">
+        <div className="surface-card rounded-[17px] p-6">
+          <p className="text-[10px] font-black uppercase tracking-[0.16em] text-accent">
             Result
           </p>
-          <p className="mt-3 font-mono text-3xl font-medium tabular-nums text-term">
+          <p className="mt-3 text-3xl font-bold tabular-nums tracking-tight text-accent">
             83% less time
           </p>
           <div className="mt-5 space-y-3">
             <div>
               <div className="flex items-baseline justify-between text-xs text-fg-muted">
                 <span>Before</span>
-                <span className="font-mono tabular-nums">90 min/day</span>
+                <span className="tabular-nums">90 min/day</span>
               </div>
-              <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-border">
+              <div className="mt-1.5 h-[5px] overflow-hidden rounded-full bg-surface-3">
                 <div
                   className="h-full rounded-full bg-fg-subtle"
                   style={{ width: "100%" }}
@@ -590,13 +589,13 @@ function CaseStudy() {
             <div>
               <div className="flex items-baseline justify-between text-xs text-fg-muted">
                 <span>After</span>
-                <span className="font-mono tabular-nums text-fg-strong">
+                <span className="tabular-nums text-fg-strong">
                   15 min/day
                 </span>
               </div>
-              <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-border">
+              <div className="mt-1.5 h-[5px] overflow-hidden rounded-full bg-surface-3">
                 <div
-                  className="h-full rounded-full bg-term"
+                  className="h-full rounded-full bg-gradient-to-r from-accent-lo to-accent"
                   style={{ width: "17%" }}
                 />
               </div>
@@ -606,8 +605,8 @@ function CaseStudy() {
             Two weeks in and still running. No retraining required.
           </p>
         </div>
-        <div className="rounded-[10px] border border-border bg-surface p-6">
-          <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-fg-subtle">
+        <div className="surface-card rounded-[17px] p-6">
+          <p className="text-[10px] font-black uppercase tracking-[0.16em] text-accent">
             Stack
           </p>
           <ul className="mt-3 flex flex-wrap gap-2">
@@ -620,7 +619,7 @@ function CaseStudy() {
             ].map((t) => (
               <li
                 key={t}
-                className="rounded-lg bg-term-sub px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-wide text-term"
+                className="rounded-[8px] bg-accent-sub px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-accent"
               >
                 {t}
               </li>
@@ -760,7 +759,7 @@ const PROJECTS: Project[] = [
 function Projects() {
   return (
     <section id="projects" data-reveal className="mt-24 lg:mt-32">
-      <Kicker number="04">Projects</Kicker>
+      <Kicker>Projects</Kicker>
       <h2 className="mt-4 text-2xl font-semibold tracking-tight text-fg-strong md:text-3xl">
         Things I've shipped for myself.
       </h2>
@@ -773,11 +772,11 @@ function Projects() {
         {PROJECTS.map((p) => (
           <article
             key={p.title}
-            className="group relative overflow-hidden rounded-[10px] border border-border bg-surface transition-colors hover:bg-surface-2"
+            className="surface-card group relative overflow-hidden rounded-[17px] transition-[transform,border-color] duration-[240ms] hover:-translate-y-1 hover:border-border-accent"
           >
             <span
               aria-hidden="true"
-              className="absolute inset-x-0 top-0 z-10 h-px bg-term opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+              className="absolute inset-x-0 top-0 z-10 h-[3px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"
             />
             <div
               className={`w-full overflow-hidden border-b border-border bg-bg ${
@@ -812,13 +811,13 @@ function Projects() {
                     href={p.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="inline-flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.15em] text-accent hover:text-accent-hi hover:underline"
+                    className="inline-flex items-center gap-1 text-[11px] font-extrabold uppercase tracking-[0.16em] text-accent hover:text-accent-hi hover:underline"
                   >
                     {p.hrefLabel ?? "View"}
                     <ArrowRight size={12} aria-hidden="true" />
                   </a>
                 ) : p.status ? (
-                  <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-fg-subtle">
+                  <span className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-fg-subtle">
                     {p.status}
                   </span>
                 ) : null}
@@ -831,7 +830,7 @@ function Projects() {
                 {p.tech.map((t) => (
                   <li
                     key={t}
-                    className="rounded-lg bg-term-sub px-2.5 py-1 font-mono text-[11px] font-medium uppercase tracking-wide text-term"
+                    className="rounded-[8px] bg-accent-sub px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-accent"
                   >
                     {t}
                   </li>
@@ -848,7 +847,7 @@ function Projects() {
 function Blueprint() {
   return (
     <section id="blueprint" data-reveal className="mt-24 lg:mt-32">
-      <Kicker number="05">The Blueprint</Kicker>
+      <Kicker>The Blueprint</Kicker>
       <h2 className="mt-4 text-2xl font-semibold tracking-tight text-fg-strong md:text-3xl">
         The Operator Blueprint
       </h2>
@@ -861,16 +860,16 @@ function Blueprint() {
         {FRAMEWORK.map((f, i) => (
           <article
             key={f.title}
-            className="group relative overflow-hidden rounded-[10px] border border-border bg-surface p-6 transition-colors hover:bg-surface-2"
+            className="surface-card group relative overflow-hidden rounded-[17px] p-6 transition-[transform,border-color] duration-[240ms] hover:-translate-y-1 hover:border-border-accent"
           >
             <span
               aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-px bg-term opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+              className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"
             />
-            <span className="absolute right-4 top-4 font-mono text-[11px] tracking-widest text-fg-subtle">
+            <span className="absolute right-4 top-4 text-[11px] font-black tracking-widest text-accent">
               0{i + 1}
             </span>
-            <f.icon size={22} className="text-term" aria-hidden="true" />
+            <f.icon size={22} className="text-accent" aria-hidden="true" />
             <h3 className="mt-4 text-base font-semibold text-fg-strong">
               {f.title}
             </h3>
@@ -892,7 +891,7 @@ function Blueprint() {
 function Contact() {
   return (
     <section id="contact" data-reveal className="mt-24 lg:mt-32 lg:pb-24">
-      <Kicker number="06">Contact</Kicker>
+      <Kicker>Contact</Kicker>
       <h2 className="mt-4 text-2xl font-semibold tracking-tight text-fg-strong md:text-3xl">
         Where are you losing leads?
       </h2>
@@ -904,21 +903,21 @@ function Contact() {
       <div className="mt-6 flex flex-wrap items-center gap-3">
         <a
           href={`mailto:${EMAIL}?subject=Start%20with%20an%20audit`}
-          className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-medium text-on-accent transition-colors hover:bg-accent-hi"
+          className="inline-flex items-center gap-2 rounded-[12px] bg-gradient-to-br from-accent-hi to-accent-lo px-5 py-3 text-sm font-black uppercase tracking-[0.7px] text-on-accent shadow-[0_15px_35px_rgb(166_255_63_/_0.24)] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-1 hover:shadow-[0_22px_48px_rgb(166_255_63_/_0.35)]"
         >
           <Mail size={16} aria-hidden="true" />
           Start with an audit
         </a>
         <a
           href={LINKEDIN_URL}
-          className="inline-flex items-center rounded-lg border border-accent px-5 py-3 text-sm font-medium text-accent transition-colors hover:bg-accent-sub"
+          className="inline-flex items-center rounded-[12px] border border-border-accent px-5 py-3 text-sm font-medium text-accent transition-colors hover:bg-accent-sub"
           target="_blank"
           rel="noreferrer"
         >
           LinkedIn
         </a>
       </div>
-      <p className="mt-6 font-mono text-sm text-fg-muted">{EMAIL}</p>
+      <p className="mt-6 text-sm text-fg-muted">{EMAIL}</p>
     </section>
   );
 }
@@ -928,7 +927,7 @@ function Footer() {
     <footer className="mt-24 border-t border-border pt-6 lg:mt-32">
       <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-fg-subtle">
         <p>Paulo Aunor · Kitchener-Waterloo, Canada</p>
-        <p className="font-mono tabular-nums">2026</p>
+        <p className="tabular-nums">2026</p>
       </div>
     </footer>
   );
