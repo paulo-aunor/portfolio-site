@@ -1,15 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  AlertTriangle,
   ArrowDown,
   ArrowRight,
-  Bell,
   BookOpen,
   Bot,
   Calculator,
   ClipboardList,
   Database,
-  FileText,
   Github,
   Globe,
   Inbox,
@@ -20,10 +17,8 @@ import {
   Milestone,
   PenLine,
   Receipt,
-  Send,
   ShieldCheck,
   UserCheck,
-  UserPlus,
   Wrench,
   X,
   type LucideIcon,
@@ -38,7 +33,6 @@ type NavItem = { id: string; label: string };
 const NAV_ITEMS: NavItem[] = [
   { id: "about", label: "About" },
   { id: "work", label: "What I build" },
-  { id: "case-study", label: "Case study" },
   { id: "projects", label: "Projects" },
   { id: "blueprint", label: "The Blueprint" },
   { id: "contact", label: "Contact" },
@@ -206,18 +200,19 @@ function Sidebar({
           </a>
         </h1>
         <p className="mt-3 text-lg font-medium text-fg-strong">
-          Software Developer &amp; AI Automation Specialist
+          Software Developer
         </p>
         <p className="mt-2 max-w-xs text-sm text-fg-muted">
-          Building software and AI that shorten the path from visitor to paying
-          customer. Based in Kitchener-Waterloo.
+          I build web apps and the automation behind them, the kind that
+          keeps running after I'm gone. Based in Kitchener-Waterloo.
         </p>
 
         <p className="mt-6 text-[10px] font-black uppercase tracking-[0.16em] text-accent">
           Currently
         </p>
         <p className="mt-1 text-sm text-fg-muted">
-          Flat-fee audits and AI-automation builds for small businesses.
+          Full-stack builds, plus flat-fee automation audits for small
+          businesses.
         </p>
 
         <nav aria-label="Section" className="mt-12 hidden lg:block">
@@ -353,21 +348,17 @@ function About() {
     <section id="about" data-reveal className="pt-8 lg:pt-24">
       <Kicker>About</Kicker>
       <h2 className="mt-4 max-w-2xl text-3xl font-bold leading-tight tracking-tight text-fg-strong md:text-4xl">
-        Software and AI that turn more visitors into customers.
+        I build the software, then the automation that keeps it running.
       </h2>
-      <div className="mt-6 space-y-4 text-base leading-relaxed text-fg-muted">
+      <div className="mt-6 text-base leading-relaxed text-fg-muted">
         <p>
-          I design and build web apps, AI agents, and automation that shorten
-          the path from visitor to paying customer. Before I wrote a line of
-          code, I spent seven years on the operator side of POS and ERP. I know
-          where deals get lost.
-        </p>
-        <p>
-          Most of my clients are not technical. They run a shop, a clinic, a
-          practice. What they hire me for is making the automation land in their
-          tools and{" "}
-          <span className="text-fg-strong">keep running</span>, not just demo
-          well.
+          Small businesses lose about{" "}
+          <span className="text-fg-strong">24 days a year</span> to financial
+          admin, invoicing and chasing payments included, while most software
+          marketed to fix it wants you to rebuild around it. I build the kind
+          that fits what you already use instead, and{" "}
+          <span className="text-fg-strong">keeps running</span> after I'm
+          gone.
         </p>
       </div>
 
@@ -380,7 +371,7 @@ function About() {
           <ArrowRight size={16} aria-hidden="true" />
         </a>
         <a
-          href="#case-study"
+          href="#work"
           className="inline-flex items-center rounded-[12px] border border-border-accent px-5 py-3 text-sm font-medium text-accent transition-colors hover:bg-accent-sub"
         >
           See shipped work
@@ -401,12 +392,19 @@ function About() {
 
       <dl className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-3">
         {[
-          { value: "7 years", label: "on the operator side of POS and ERP" },
           {
-            value: "Full-stack + AI",
-            label: "React, Node, TypeScript, and LLM integrations",
+            value: "7 years",
+            label: "on the operator side of POS and ERP, before writing code",
           },
-          { value: "Audit first", label: "flat-fee engagements, never hourly" },
+          {
+            value: "Full-stack",
+            label:
+              "React, Node, TypeScript. One stack, not a patchwork of no-code tools",
+          },
+          {
+            value: "Flat fee",
+            label: "quoted before any code gets written, no hourly surprises",
+          },
         ].map((s) => (
           <div key={s.value} className="surface-card flex flex-col rounded-[17px] p-5">
             <dt className="order-last mt-1 text-xs text-fg-muted">{s.label}</dt>
@@ -420,55 +418,23 @@ function About() {
   );
 }
 
-const WORKFLOWS: {
-  icon: LucideIcon;
-  title: string;
-  body: string;
-  steps: FlowStep[];
-}[] = [
-  {
-    icon: UserPlus,
-    title: "Lead qualification & routing",
-    body: "Every inquiry scored the moment it lands, then routed to the right person in your CRM. Your team spends time on leads that are actually ready to buy.",
-    steps: [
-      { icon: UserPlus, label: "Inquiry submitted" },
-      { icon: Bot, label: "AI scores fit" },
-      { icon: Database, label: "Lands in CRM" },
-      { icon: Bell, label: "Hot leads pinged" },
-    ],
-  },
+type BuildPattern = { icon: LucideIcon; title: string; body: string };
+
+const BUILD_PATTERNS: BuildPattern[] = [
   {
     icon: Globe,
-    title: "Conversion-focused web builds",
-    body: "Websites and web apps built to qualify visitors while they browse: smart forms, AI chat that answers real questions, pages that adapt to what someone's looking for. Fewer drop-offs before anyone reaches out.",
-    steps: [
-      { icon: Globe, label: "Visitor arrives" },
-      { icon: Bot, label: "AI engages + qualifies" },
-      { icon: UserCheck, label: "Ready-to-buy lead" },
-      { icon: Send, label: "Handed to sales" },
-    ],
+    title: "Lead capture that actually qualifies",
+    body: "Forms and chat that ask the right question instead of just collecting a name, so your team spends time on people ready to buy.",
   },
   {
-    icon: FileText,
-    title: "Back-office automation",
-    body: "Invoices, orders, and reports checked against your numbers by plain code, not a guess. Every discrepancy flagged with the reason.",
-    steps: [
-      { icon: FileText, label: "Invoice arrives" },
-      { icon: Bot, label: "AI extracts line items" },
-      { icon: Calculator, label: "Code checks the math" },
-      { icon: AlertTriangle, label: "Flagged if off" },
-    ],
+    icon: Calculator,
+    title: "Reports that check themselves",
+    body: "Invoices and orders checked against your numbers by code, not by someone doing it by hand every week. Discrepancies flagged with the reason.",
   },
   {
-    icon: Wrench,
-    title: "Ops systems that finally talk",
-    body: "Your POS, inventory, accounting, and payroll live in separate SaaS tools, so someone rebuilds the same reports every week by hand. I stitch them together with a custom internal tool and let AI handle the judgment calls (returns vs refunds, misclassified line items, edge cases the rules can't catch). Your ops team spends the time on decisions, not data entry.",
-    steps: [
-      { icon: Database, label: "Systems don't talk" },
-      { icon: Wrench, label: "Custom pull job runs" },
-      { icon: Bot, label: "AI classifies edge cases" },
-      { icon: ClipboardList, label: "Clean report to ops" },
-    ],
+    icon: Database,
+    title: "Systems that finally talk to each other",
+    body: "Your POS, inventory, and accounting live in separate tools. A custom internal tool pulls them into one place and hands the judgment calls to AI, not to someone re-typing numbers.",
   },
 ];
 
@@ -477,154 +443,145 @@ function Work() {
     <section id="work" data-reveal className="mt-24 lg:mt-32">
       <Kicker>What I build</Kicker>
       <h2 className="mt-4 text-2xl font-semibold tracking-tight text-fg-strong md:text-3xl">
-        Which one is yours?
+        One shipped example. The pattern repeats.
       </h2>
-
-      <div className="mt-10 flex flex-col gap-6">
-        {WORKFLOWS.map((w) => (
-          <article
-            key={w.title}
-            className="surface-card group relative overflow-hidden rounded-[17px] p-6 transition-[transform,border-color] duration-[240ms] hover:-translate-y-1 hover:border-border-accent"
-          >
-            <span
-              aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-            />
-            <div className="flex items-start gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-accent-sub">
-                <w.icon size={22} className="text-accent" aria-hidden="true" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-semibold text-fg-strong">
-                  {w.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-fg-muted">
-                  {w.body}
-                </p>
-              </div>
-            </div>
-            <div className="mt-5">
-              <FlowDiagram steps={w.steps} />
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function CaseStudy() {
-  return (
-    <section id="case-study" data-reveal className="mt-24 lg:mt-32">
-      <Kicker>Case study</Kicker>
-      <h2 className="mt-4 text-2xl font-semibold tracking-tight text-fg-strong md:text-3xl">
-        90 minutes a day, gone.
-      </h2>
-      <p className="mt-2 text-sm text-fg-muted">
-        In production since June 2026. One shipped example. The pattern (AI
-        drafts, a human approves) applies wherever your team repeats the same
-        judgment call.
+      <p className="mt-3 max-w-xl text-sm text-fg-muted">
+        I'm a full-stack developer first. I plan the system, make the calls,
+        and troubleshoot when something breaks; AI is a tool I use to build
+        faster, not a replacement for judgment, and plain code checks
+        anything involving math or rules. Below is the one I've shipped, and
+        three shapes the same approach takes elsewhere.
       </p>
 
-      <div className="mt-8">
-        <FlowDiagram
-          steps={[
-            { icon: Inbox, label: "Mail arrives" },
-            { icon: Bot, label: "Claude reads via MCP" },
-            { icon: PenLine, label: "Draft saved" },
-            { icon: UserCheck, label: "She reviews + sends" },
-          ]}
-        />
-      </div>
+      <div className="surface-card mt-10 rounded-[20px] p-6 md:p-8">
+        <p className="text-[10px] font-black uppercase tracking-[0.16em] text-accent">
+          Shipped, June 2026
+        </p>
+        <h3 className="mt-2 text-xl font-semibold tracking-tight text-fg-strong">
+          90 minutes a day, gone.
+        </h3>
 
-      <div className="mt-10 space-y-6 text-sm leading-relaxed text-fg-muted">
-        <p>
-          <strong className="font-semibold text-fg-strong">The problem.</strong>{" "}
-          A small business owner was spending about 90 minutes a day triaging
-          one inbox: vendor messages, customer questions, internal updates.
-          Off-the-shelf tools meant retraining, a brittle Zapier flow, or moving
-          her mail into someone else's tenant.
-        </p>
-        <p>
-          <strong className="font-semibold text-fg-strong">
-            What I built.
-          </strong>{" "}
-          An MCP server connecting Claude Desktop directly to her IMAP mailbox.
-          Claude reads folders, searches threads, and writes draft replies into
-          her Drafts folder. It never sends. She reviews, edits, and hits send.
-          Her email never leaves her own server.
-        </p>
-        <p>
-          <strong className="font-semibold text-fg-strong">
-            How it shipped.
-          </strong>{" "}
-          The build was not the hard part. Getting Python, credentials,
-          certificates, and Claude Desktop config to line up on her Mac without
-          me on a call took longer than the tool itself. I shipped a custom
-          macOS installer she ran herself.
-        </p>
-      </div>
+        <div className="mt-6">
+          <FlowDiagram
+            steps={[
+              { icon: Inbox, label: "Mail arrives" },
+              { icon: Bot, label: "Claude reads via MCP" },
+              { icon: PenLine, label: "Draft saved" },
+              { icon: UserCheck, label: "She reviews + sends" },
+            ]}
+          />
+        </div>
 
-      <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
-        <div className="surface-card rounded-[17px] p-6">
-          <p className="text-[10px] font-black uppercase tracking-[0.16em] text-accent">
-            Result
+        <div className="mt-8 space-y-5 text-sm leading-relaxed text-fg-muted">
+          <p>
+            <strong className="font-semibold text-fg-strong">
+              The problem.
+            </strong>{" "}
+            A small business owner was spending about 90 minutes a day
+            triaging one inbox: vendor messages, customer questions, internal
+            updates. Off-the-shelf tools meant retraining, a brittle Zapier
+            flow, or moving her mail into someone else's tenant.
           </p>
-          <p className="mt-3 text-3xl font-bold tabular-nums tracking-tight text-accent">
-            83% less time
+          <p>
+            <strong className="font-semibold text-fg-strong">
+              What I built.
+            </strong>{" "}
+            An MCP server connecting Claude Desktop directly to her IMAP
+            mailbox. Claude reads folders, searches threads, and writes draft
+            replies into her Drafts folder. It never sends. She reviews,
+            edits, and hits send. Her email never leaves her own server.
           </p>
-          <div className="mt-5 space-y-3">
-            <div>
-              <div className="flex items-baseline justify-between text-xs text-fg-muted">
-                <span>Before</span>
-                <span className="tabular-nums">90 min/day</span>
-              </div>
-              <div className="mt-1.5 h-[5px] overflow-hidden rounded-full bg-surface-3">
-                <div
-                  className="h-full rounded-full bg-fg-subtle"
-                  style={{ width: "100%" }}
-                />
-              </div>
-            </div>
-            <div>
-              <div className="flex items-baseline justify-between text-xs text-fg-muted">
-                <span>After</span>
-                <span className="tabular-nums text-fg-strong">
-                  15 min/day
-                </span>
-              </div>
-              <div className="mt-1.5 h-[5px] overflow-hidden rounded-full bg-surface-3">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-accent-lo to-accent"
-                  style={{ width: "17%" }}
-                />
-              </div>
-            </div>
-          </div>
-          <p className="mt-4 text-xs text-fg-muted">
-            Two weeks in and still running. No retraining required.
+          <p>
+            <strong className="font-semibold text-fg-strong">
+              How it shipped.
+            </strong>{" "}
+            The build was not the hard part. Getting Python, credentials,
+            certificates, and Claude Desktop config to line up on her Mac
+            without me on a call took longer than the tool itself. I shipped
+            a custom macOS installer she ran herself.
           </p>
         </div>
-        <div className="surface-card rounded-[17px] p-6">
-          <p className="text-[10px] font-black uppercase tracking-[0.16em] text-accent">
-            Stack
-          </p>
-          <ul className="mt-3 flex flex-wrap gap-2">
-            {[
-              "Python",
-              "Anthropic MCP",
-              "IMAP",
-              "Claude Desktop",
-              "Custom macOS installer",
-            ].map((t) => (
-              <li
-                key={t}
-                className="rounded-[8px] bg-accent-sub px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-accent"
-              >
-                {t}
-              </li>
-            ))}
-          </ul>
+
+        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="rounded-[14px] border border-border bg-surface-2 p-5">
+            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-accent">
+              Result
+            </p>
+            <p className="mt-3 text-3xl font-bold tabular-nums tracking-tight text-accent">
+              83% less time
+            </p>
+            <div className="mt-5 space-y-3">
+              <div>
+                <div className="flex items-baseline justify-between text-xs text-fg-muted">
+                  <span>Before</span>
+                  <span className="tabular-nums">90 min/day</span>
+                </div>
+                <div className="mt-1.5 h-[5px] overflow-hidden rounded-full bg-surface-3">
+                  <div
+                    className="h-full rounded-full bg-fg-subtle"
+                    style={{ width: "100%" }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div className="flex items-baseline justify-between text-xs text-fg-muted">
+                  <span>After</span>
+                  <span className="tabular-nums text-fg-strong">
+                    15 min/day
+                  </span>
+                </div>
+                <div className="mt-1.5 h-[5px] overflow-hidden rounded-full bg-surface-3">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-accent-lo to-accent"
+                    style={{ width: "17%" }}
+                  />
+                </div>
+              </div>
+            </div>
+            <p className="mt-4 text-xs text-fg-muted">
+              Two weeks in and still running. No retraining required.
+            </p>
+          </div>
+          <div className="rounded-[14px] border border-border bg-surface-2 p-5">
+            <p className="text-[10px] font-black uppercase tracking-[0.16em] text-accent">
+              Stack
+            </p>
+            <ul className="mt-3 flex flex-wrap gap-2">
+              {[
+                "Python",
+                "Anthropic MCP",
+                "IMAP",
+                "Claude Desktop",
+                "Custom macOS installer",
+              ].map((t) => (
+                <li
+                  key={t}
+                  className="rounded-[8px] bg-accent-sub px-2.5 py-1 text-[11px] font-extrabold uppercase tracking-wider text-accent"
+                >
+                  {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-8">
+        <p className="text-[10px] font-black uppercase tracking-[0.16em] text-fg-subtle">
+          Same approach, different shape
+        </p>
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {BUILD_PATTERNS.map((b) => (
+            <div key={b.title} className="surface-card rounded-[14px] p-5">
+              <b.icon size={20} className="text-accent" aria-hidden="true" />
+              <h4 className="mt-3 text-sm font-semibold text-fg-strong">
+                {b.title}
+              </h4>
+              <p className="mt-2 text-xs leading-relaxed text-fg-muted">
+                {b.body}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -659,8 +616,8 @@ const FRAMEWORK: {
         body: "Self-hosted automation, plain code, or a full web app, whichever actually solves the problem. Never a trendy stack for its own sake.",
       },
       {
-        label: "AI where it earns its place.",
-        body: "AI handles the judgment calls. Deterministic code checks anything involving math or rules.",
+        label: "I make the calls, AI speeds up the build.",
+        body: "I plan the system and troubleshoot it. AI is a tool for building faster, not a stand-in for judgment; deterministic code checks anything involving math or rules.",
       },
     ],
   },
@@ -956,7 +913,6 @@ export default function App() {
         <main ref={mainRef} className="lg:py-24">
           <About />
           <Work />
-          <CaseStudy />
           <Projects />
           <Blueprint />
           <Contact />
