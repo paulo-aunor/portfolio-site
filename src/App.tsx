@@ -24,7 +24,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-const EMAIL = "ramonpaunor23@gmail.com";
+const EMAIL = "aunor.paulo@gmail.com";
 const LINKEDIN_URL = "https://www.linkedin.com/in/pauloaunordev/";
 const GITHUB_URL = "https://github.com/paulo-aunor";
 
@@ -203,15 +203,16 @@ function Sidebar({
           Software Developer
         </p>
         <p className="mt-2 max-w-xs text-sm text-fg-muted">
-          I build web apps and the automation behind them, the kind that
-          keeps running after I'm gone. Based in Kitchener-Waterloo.
+          Seven years shipping production POS, payment, and accounting
+          integrations for 50+ retail and restaurant clients. Based in
+          Kitchener-Waterloo.
         </p>
 
         <p className="mt-6 text-[10px] font-black uppercase tracking-[0.16em] text-accent">
           Currently
         </p>
         <p className="mt-1 text-sm text-fg-muted">
-          Full-stack builds, plus flat-fee automation audits for small
+          Full-stack builds and flat-fee automation audits for small
           businesses.
         </p>
 
@@ -321,11 +322,11 @@ function MobileNav({ active }: { active: string }) {
             ))}
             <li className="mt-2">
               <a
-                href="#contact"
+                href="#projects"
                 className="block rounded-[12px] bg-gradient-to-br from-accent-hi to-accent-lo px-4 py-3 text-center text-sm font-black uppercase tracking-[0.7px] text-on-accent shadow-[0_10px_25px_rgb(166_255_63_/_0.22)]"
                 onClick={() => setOpen(false)}
               >
-                Start with an audit
+                See shipped work
               </a>
             </li>
           </ul>
@@ -348,33 +349,45 @@ function About() {
     <section id="about" data-reveal className="pt-8 lg:pt-24">
       <Kicker>About</Kicker>
       <h2 className="mt-4 max-w-2xl text-3xl font-bold leading-tight tracking-tight text-fg-strong md:text-4xl">
-        I build the software, then the automation that keeps it running.
+        Seven years in the machine room of small-business systems, before
+        I started shipping my own.
       </h2>
-      <div className="mt-6 text-base leading-relaxed text-fg-muted">
+      <div className="mt-6 space-y-4 text-base leading-relaxed text-fg-muted">
         <p>
-          Small businesses lose about{" "}
-          <span className="text-fg-strong">24 days a year</span> to financial
-          admin, invoicing and chasing payments included, while most software
-          marketed to fix it wants you to rebuild around it. I build the kind
-          that fits what you already use instead, and{" "}
-          <span className="text-fg-strong">keeps running</span> after I'm
-          gone.
+          I spent seven years keeping point-of-sale, payment, and accounting
+          systems running for{" "}
+          <span className="text-fg-strong">50+ retail and restaurant</span>{" "}
+          clients across the Gulf. When a Friday-night system broke, I was
+          the one on the phone. Now I build the same class of software for
+          the same class of businesses.
+        </p>
+        <p>
+          Most agencies will glue together no-code tools and hand you a
+          system nobody on staff can maintain the day the freelancer
+          disappears. I ship{" "}
+          <span className="text-fg-strong">
+            one stack you own, in code your next hire can read
+          </span>
+          , and I stay reachable when the thing you shipped last month
+          starts behaving badly at 6 PM on a Friday. Without that, what
+          you actually buy is a demo that works on a good day, an invoice,
+          and a growing pile of workarounds nobody documented.
         </p>
       </div>
 
       <div className="mt-8 flex flex-wrap items-center gap-3">
         <a
-          href="#contact"
+          href="#projects"
           className="inline-flex items-center gap-2 rounded-[12px] bg-gradient-to-br from-accent-hi to-accent-lo px-5 py-3 text-sm font-black uppercase tracking-[0.7px] text-on-accent shadow-[0_15px_35px_rgb(166_255_63_/_0.24)] transition-[transform,box-shadow] duration-[250ms] hover:-translate-y-1 hover:shadow-[0_22px_48px_rgb(166_255_63_/_0.35)]"
         >
-          Start with an audit
+          See shipped work
           <ArrowRight size={16} aria-hidden="true" />
         </a>
         <a
-          href="#work"
+          href="#contact"
           className="inline-flex items-center rounded-[12px] border border-border-accent px-5 py-3 text-sm font-medium text-accent transition-colors hover:bg-accent-sub"
         >
-          See shipped work
+          Start with an audit
         </a>
       </div>
 
@@ -394,16 +407,18 @@ function About() {
         {[
           {
             value: "7 years",
-            label: "on the operator side of POS and ERP, before writing code",
+            label:
+              "shipping production integrations for 50+ retail and restaurant clients",
           },
           {
-            value: "Full-stack",
+            value: "One stack",
             label:
-              "React, Node, TypeScript. One stack, not a patchwork of no-code tools",
+              "React, Node, TypeScript. Code your next hire can read, not a patchwork of no-code tools",
           },
           {
             value: "Flat fee",
-            label: "quoted before any code gets written, no hourly surprises",
+            label:
+              "quoted in writing before any code gets written, no hourly surprises",
           },
         ].map((s) => (
           <div key={s.value} className="surface-card flex flex-col rounded-[17px] p-5">
@@ -681,35 +696,37 @@ type Project = {
 const PROJECTS: Project[] = [
   {
     title: "TetherPOS",
-    tagline: "Offline-first POS for retail and restaurants.",
-    body: "Built for shops where the internet drops out mid-shift. Menu, inventory, and sales reports run entirely on-device via IndexedDB. Excel import for menu/inventory setup.",
+    tagline: "Offline-first POS for small retailers whose internet drops mid-shift.",
+    body: "Cashiers keep ringing sales through outages that would freeze Square or Shopify POS. Owners import existing Excel inventory instead of re-entering hundreds of SKUs, and read end-of-day sales on the same device without logging into a cloud dashboard. React + Vite PWA with IndexedDB (via Dexie) for local transactional storage; every ring, refund, and price change writes locally first, then a background sync layer reconciles with the owner's records when the connection returns. Intentionally single-store, bring-your-own-card-reader: not a merchant processor, not multi-location, not an inventory forecaster.",
     image: `${import.meta.env.BASE_URL}projects/tetherpos-cart.png`,
     imageAlt: "TetherPOS point-of-sale screen with menu items and populated cart",
     imageAspect: "landscape",
     tech: ["React", "Vite", "Dexie.js", "JavaScript"],
     href: "https://github.com/paulo-aunor/tetherpos",
     hrefLabel: "Repo",
+    status: "June 2026 · In production",
   },
   {
     title: "Docket Vein",
-    tagline: "Personal CRM for freelance leads, inbound and outbound.",
-    body: "Pulls job posts from r/forhire and outbound local-business leads from Google Places. Scores each against an ICP profile via Gemini 2.5 Flash and drafts cold outreach in your voice. Runs entirely on your machine.",
+    tagline: "Lead-finding and outreach CRM for solo freelancers who spend more time hunting work than doing it.",
+    body: "Every morning it hands the user a scored shortlist of that day's inbound job posts (r/forhire) and outbound prospects (local businesses ranked by ICP fit and Lighthouse audit), with a first-draft cold email in their voice ready to review. Node + Express + SQLite API orchestrates Python workers per source; Gemini 2.5 Flash handles ICP scoring and draft generation. Runs entirely on the user's laptop, so lead data never touches a third-party CRM. Solo scope: no team features, no built-in email sending, no enterprise integrations.",
     image: `${import.meta.env.BASE_URL}projects/docket-vein-picks.png`,
     imageAlt: "Docket Vein Daily Picks view showing AI-scored leads with reasoning",
     imageAspect: "landscape",
     tech: ["React", "Node", "Express", "SQLite", "Python", "Gemini"],
-    status: "Private repo",
+    status: "July 2026 · In progress",
   },
   {
     title: "Record Routes",
-    tagline: "Delivery checklist for the Waterloo Region Record paper route.",
-    body: "Pick tonight's routes, get an ordered checklist of stops, tap an address for turn-by-turn in Google Maps. State survives app kills and phone reboots. Screen stays awake through the shift.",
+    tagline: "React Native app for a Waterloo Region Record paper-route delivery shift.",
+    body: "Driver picks tonight's routes at shift start; app hands them an ordered checklist of stops, deep-links each address to Google Maps for turn-by-turn, and keeps the screen awake so they aren't unlocking the phone every stop. If the app crashes or the phone reboots, the next launch resumes at the exact stop. Expo + TypeScript with AsyncStorage for local persistence: the recovery-after-crash guarantee is the whole reason a spreadsheet on the driver's phone doesn't cut it.",
     image: `${import.meta.env.BASE_URL}projects/record-routes-home.png`,
     imageAlt: "Record Routes home screen with three delivery routes selected",
     imageAspect: "portrait",
     tech: ["React Native", "Expo", "TypeScript", "AsyncStorage"],
     href: "https://github.com/paulo-aunor/record-routes",
     hrefLabel: "Repo",
+    status: "August 2026 · In production",
   },
 ];
 
@@ -773,12 +790,13 @@ function Projects() {
                     {p.hrefLabel ?? "View"}
                     <ArrowRight size={12} aria-hidden="true" />
                   </a>
-                ) : p.status ? (
-                  <span className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-fg-subtle">
-                    {p.status}
-                  </span>
                 ) : null}
               </div>
+              {p.status ? (
+                <p className="mt-1 text-[10px] font-black uppercase tracking-[0.16em] text-accent">
+                  {p.status}
+                </p>
+              ) : null}
               <p className="mt-1 text-sm font-medium text-fg">{p.tagline}</p>
               <p className="mt-3 text-sm leading-relaxed text-fg-muted">
                 {p.body}
