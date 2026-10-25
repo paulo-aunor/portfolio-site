@@ -718,15 +718,15 @@ const PROJECTS: Project[] = [
   },
   {
     title: "Record Routes",
-    tagline: "React Native app for a Waterloo Region Record paper-route delivery shift.",
-    body: "Driver picks tonight's routes at shift start; app hands them an ordered checklist of stops, deep-links each address to Google Maps for turn-by-turn, and keeps the screen awake so they aren't unlocking the phone every stop. If the app crashes or the phone reboots, the next launch resumes at the exact stop. Expo + TypeScript with AsyncStorage for local persistence: the recovery-after-crash guarantee is the whole reason a spreadsheet on the driver's phone doesn't cut it.",
+    tagline: "React Native app that plans and runs a Waterloo Region Record paper-route shift, with every delivery order checked against real road routing.",
+    body: "Driver picks tonight's routes (five routes, 346 houses) and gets an ordered checklist. Each address deep-links to Google Maps for turn-by-turn, the screen stays awake, and a crash or reboot resumes at the exact stop. The hard part is the ordering. A distance matrix lets a car reverse for free at every stop, so orders that looked short on paper sent the driver round the block and past the same houses three times. Each house now has two states (which way the car is facing), distances come from OSRM with a bearing at each end, and the search scores a plan the way the car would drive it. Checked against OSRM's own routes, all five routes together dropped from 59.7 km to 46.1 km, and the other 24 route combinations came out 20% shorter in total. The same search runs on the phone for a start from the driver's location and for re-routing mid-shift, and ordering needs no connection. A depot PDF route list can be imported, and houses can be held, hidden or dropped without a rebuild. Expo + TypeScript with AsyncStorage; the road data ships inside the app.",
     image: `${import.meta.env.BASE_URL}projects/record-routes-home.png`,
     imageAlt: "Record Routes home screen with three delivery routes selected",
     imageAspect: "portrait",
-    tech: ["React Native", "Expo", "TypeScript", "AsyncStorage"],
+    tech: ["React Native", "Expo", "TypeScript", "AsyncStorage", "OSRM"],
     href: "https://github.com/paulo-aunor/record-routes",
     hrefLabel: "Repo",
-    status: "August 2026 · In production",
+    status: "October 2026 · In production",
   },
 ];
 
